@@ -10,8 +10,8 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const express = app.getHttpAdapter().getInstance();
 
-  const assets = path.join(__dirname, '../src', 'public'); // Directory with static HTML/CSS/JS/other files
-  const views = path.join(__dirname, '../src', 'views'); // Directory with *.njk templates
+  const assets = path.join(__dirname, '../src/main/webapp', 'public'); // Directory with static HTML/CSS/JS/other files
+  const views = path.join(__dirname, '../src/main/webapp', 'views'); // Directory with *.njk templates
 
   nunjucks.configure(views, { express });
   
