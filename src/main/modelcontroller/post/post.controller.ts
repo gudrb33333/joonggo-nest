@@ -15,7 +15,7 @@ export class PostController {
         if(!req.isAuthenticated()){
             res.render('login', {title: 'NodeBird'});
         }else{
-            
+            res.render('main', {title: 'NodeBird'});
         }
 
     }

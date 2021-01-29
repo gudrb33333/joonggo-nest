@@ -3,6 +3,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import * as nunjucks from 'nunjucks';
 import * as passport from 'passport';
+import * as session from 'express-session';
 
 import * as path from 'path';
 
@@ -15,9 +16,19 @@ async function bootstrap() {
 
   nunjucks.configure(views, { express });
   
+
+  app.use(session({
+    secret: 'CHANGEME',
+    resave: false,
+    saveUninitialized: false, 
+  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   app.useStaticAssets(assets);
   app.setBaseViewsDir(views);
   app.setViewEngine('html');
+
   await app.listen(3000);
 }
 bootstrap();
