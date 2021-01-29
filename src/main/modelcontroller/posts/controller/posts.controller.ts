@@ -1,7 +1,7 @@
 import { Controller, Get, Req, Query, Post, Body, Put, Param, Delete, Res, UseGuards } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
-import { PostService } from './posts.service';
+import { PostService } from '../service/posts.service';
 
 @Controller('/')
 export class PostController {
@@ -15,6 +15,8 @@ export class PostController {
         if(!req.isAuthenticated()){
             res.render('login', {title: 'NodeBird'});
         }else{
+
+            
             res.render('main', {title: 'NodeBird'});
         }
 

@@ -5,13 +5,13 @@ import { LoginModule } from './main/modelcontroller/login/login.module';
 import { LoginService } from './main/modelcontroller/login/login.service';
 import { LoginController } from './main/modelcontroller/login/login.controller';
 
-import { PostModule } from './main/modelcontroller/posts/posts.module';
-import { PostService } from './main/modelcontroller/posts/posts.service';
-import { PostController } from './main/modelcontroller/posts/posts.controller';
+import { PostModule } from './main/modelcontroller/posts/module/posts.module';
+import { PostService } from './main/modelcontroller/posts/service/posts.service';
+import { PostController } from './main/modelcontroller/posts/controller/posts.controller';
 
 import { AuthService } from './main/modelcontroller/auth/service/auth.service';
 import { AuthModule } from './main/modelcontroller/auth/module/auth.module';
-import { IsLoggedIn,IsNotLoggedIn } from './main/modelcontroller/auth/service/auth.middleware';
+import { IsLoggedIn,IsNotLoggedIn } from './middleware/auth.middleware';
 
 import { UsersService } from './main/modelcontroller/users/users.service';
 import { UsersModule } from './main/modelcontroller/users/users.module';

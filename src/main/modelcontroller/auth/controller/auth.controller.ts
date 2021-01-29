@@ -43,13 +43,13 @@ export class AuthController {
     }
 
     @Get('/join')
-    getJoinPage(@Req() req:Request, @Res() res:Response, next:NextFunction): void{
+    getJoinPage(@Req() req:Request, @Res() res:Response): void{
 
         res.render('join',{ title: '회원가입 - NodeBird'})
     }
 
     @Post('/join')
-    postJoin(@Body() authDto:AuthDto , @Res() res:Response, next:NextFunction): void{
+    postJoin(@Body() authDto:AuthDto , @Res() res:Response): void{
 
         this.authService.createUser(authDto)
             .then((result)=>{
@@ -63,7 +63,6 @@ export class AuthController {
             })
             .catch((error)=>{
                 console.error(error);
-                next(error);
             })
     }
 

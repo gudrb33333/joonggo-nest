@@ -50,6 +50,13 @@ function addpost(){
 
 };
 
+window.onload = () => {
+      if (new URL(location.href).searchParams.get('error')) {
+        alert(new URL(location.href).searchParams.get('error'));
+      }
+    };
+
+
 $(window).scroll(function() {
 	console.log( Math.ceil($(window).scrollTop()) + " >= " + ($(document).height() - $(window).height()) );
 	if ( Math.ceil($(window).scrollTop()) >= ($(document).height() - $(window).height()) ) {
