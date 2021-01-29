@@ -5,9 +5,9 @@ import { LoginModule } from './main/modelcontroller/login/login.module';
 import { LoginService } from './main/modelcontroller/login/login.service';
 import { LoginController } from './main/modelcontroller/login/login.controller';
 
-import { PostModule } from './main/modelcontroller/post/post.module';
-import { PostService } from './main/modelcontroller/post/post.service';
-import { PostController } from './main/modelcontroller/post/post.controller';
+import { PostModule } from './main/modelcontroller/posts/posts.module';
+import { PostService } from './main/modelcontroller/posts/posts.service';
+import { PostController } from './main/modelcontroller/posts/posts.controller';
 
 import { AuthService } from './main/modelcontroller/auth/service/auth.service';
 import { AuthModule } from './main/modelcontroller/auth/module/auth.module';

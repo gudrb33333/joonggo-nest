@@ -12,7 +12,7 @@ export class LocalAuthGuard extends AuthGuard('local') {
         return result;
     }
 
-    handleRequest(err, user, info) {
+    handleRequest(err:Error, user: any, info: Object) {
         if (err || !user) {
             throw err || new UnauthorizedException();
         }

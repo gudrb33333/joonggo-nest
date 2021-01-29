@@ -18,7 +18,7 @@ export class AuthService {
 
   async validateUser(email: string, pass: string, done: any): Promise<any> {
     try{  
-        console.log(this.configService.get<string>('KAKAO_ID'));
+
         const exUser:User = await this.usersRepository.findOne(email);
 
         if(exUser){
@@ -36,7 +36,32 @@ export class AuthService {
     }
   }
 
-  async makeUser(authDto:AuthDto):Promise<string>{
+  async kakaoValidateUser(accessToken: string, refreshToken: string, profile: any, done: any): Promise<any>{
+    try {
+
+
+      const exUser:User = await this.usersRepository.findOne({
+        where: { snsId: profile.id, provider: 'kakao' },
+      });
+      if (exUser) {
+        done(null, exUser);
+      } else {
+        const newUser = await this.usersRepository.save({
+          email: profile._json && profile._json.kakao_account_email,
+          nick: profile.displayName,
+          snsId: profile.id,
+          provider: 'kakao',
+        });
+        console.log(newUser);
+        done(null, newUser);
+      }
+    } catch (error) {
+      console.error(error);
+      done(error);
+    }
+}
+
+  async createUser(authDto:AuthDto):Promise<string>{
     try{
 
         const exUser:User = await this.usersRepository.findOne(authDto.email);

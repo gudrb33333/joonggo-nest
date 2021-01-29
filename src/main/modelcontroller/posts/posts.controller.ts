@@ -1,7 +1,7 @@
 import { Controller, Get, Req, Query, Post, Body, Put, Param, Delete, Res, UseGuards } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
-import { PostService } from './post.service';
+import { PostService } from './posts.service';
 
 @Controller('/')
 export class PostController {
