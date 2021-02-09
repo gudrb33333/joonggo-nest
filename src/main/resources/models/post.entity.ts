@@ -4,7 +4,7 @@ import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,
     
 import { User } from './user.entity'
 
-@Entity('posts')
+@Entity('post')
 export class Post {
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,16 +24,19 @@ export class Post {
   @Column({nullable:true})
   repImg:string;
 
+  @Column()
+  content:string;
+
   @CreateDateColumn({type: 'timestamp',default: () => 'CURRENT_TIMESTAMP'})
   createdAt: Date;
 
   @Column({nullable:true})
-  UpdateAt: Date;
+  updatedAt: Date;
 
   @Column({nullable:true})
-  DeleteAt: Date;
+  deletedAt: Date;
 
   @ManyToOne(() => User, user => user.post)
-  user: User;
+  user: User; 
 
 }

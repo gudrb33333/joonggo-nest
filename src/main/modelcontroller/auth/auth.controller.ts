@@ -1,23 +1,41 @@
 import { Controller, Get, Req, Query, Post, Body, Put, Param, Delete, Res, UseGuards, HttpCode, HttpStatus, UseFilters } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { LocalAuthGuard } from '../service/local-auth.guard'
-import { AuthGuard } from '@nestjs/passport';
-import { UnauthorizedExceptionFilter } from '../service/auth.exception.filter'
 
-import { AuthService } from '../service/auth.service'
-import { AuthDto } from '../dto/auth.dto';
+import { JwtAuthGuard } from 'src/main/modelcontroller/auth/guard/jwt-auth.guard';
+import { LocalAuthGuard } from './guard/local-auth.guard'
+import { AuthGuard } from '@nestjs/passport';
+import { UnauthorizedExceptionFilter } from '../../../filters/auth.exception.filter'
+
+import { AuthService } from './auth.service'
+import { AuthDto } from './dto/auth.dto';
 
 @Controller('/auth')
 export class AuthController {
 
     constructor(private readonly authService: AuthService) {}
 
+    @UseGuards(JwtAuthGuard)
+    @Get('/')
+    getPosts(@Req() req:Request, @Res() res:Response) {
+
+        console.log('testest')
+        if(!req.isAuthenticated()){
+            return res.json('error');
+        }else{
+            return res.json(req.user);
+        }
+
+    }
+
+
     @Post('/login')
     @HttpCode(HttpStatus.OK)
     @UseGuards(LocalAuthGuard)
     @UseFilters(new UnauthorizedExceptionFilter())
-    login(@Body() login: AuthDto, @Req() req: Request, @Res() res: Response): void {    
-        return  res.redirect('/');  
+    async login(@Body() login: AuthDto, @Req() req: Request, @Res() res: Response){    
+
+        return res.json(await this.authService.login(req.user));
+      
     }
 
     @Get('/kakao')

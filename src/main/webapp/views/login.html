@@ -46,12 +46,14 @@
       {% endblock %}
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.1.js"></script>
     <script>
       window.onload = () => {
         if (new URL(location.href).searchParams.get('loginError')) {
           alert(new URL(location.href).searchParams.get('loginError'));
         }
       };
+
     </script>
     {% block script %}
     {% endblock %}

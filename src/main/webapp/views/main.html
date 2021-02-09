@@ -16,11 +16,8 @@
             {% if card.img %}
               <div class="card-img"><img src="{{card.repImg}}" alt="섬네일"></div>
             {% endif %}
+           
             
-            <div class="card-author"></div>
-            {% if not followerIdList.includes(card.User.id) and card.User.id !== user.id %}
-              <button class="card-follow">관심</button>
-            {% endif %}
             <div class="card-content">{{card.content}}</div>
             
           </div>
@@ -28,15 +25,10 @@
 
       </div>
 
-
-      {% if user %}
-
-      <div class="addpost">
-        <a href="/addpost">+</a>
+      <div class="addPost">
+        <a href="/addPost">+</a>
       </div>
-        
-        
-      {% endif %}
+
     </div>
    
 

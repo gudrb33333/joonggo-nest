@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from "@nestjs/config";
 import { Repository } from 'typeorm';
-import { User } from '../../../resources/models/user.entity';
-import { AuthDto } from '../dto/auth.dto';
+import { User } from '../../resources/models/user.entity';
+import { AuthDto } from './dto/auth.dto';
 import * as bcrypt from 'bcrypt'
 
 
@@ -13,27 +14,26 @@ export class AuthService {
 
   constructor( 
     @InjectRepository(User) private readonly usersRepository: Repository<User>,
-    private configService: ConfigService
+    private readonly configService: ConfigService,
+    private readonly jwtService: JwtService
   ) {}
 
-  async validateUser(email: string, pass: string, done: any): Promise<any> {
-    try{  
+  async validateUser(email: string, pass: string): Promise<any> {
+     
 
         const exUser:User = await this.usersRepository.findOne(email);
 
         if(exUser){
             const result = await bcrypt.compare(pass, exUser.password);
             if(result){
-                done(null, exUser);
+                return exUser;
             }else{
-                done(null, false, { message: '비밀번호가 일치하지 않습니다.' });
+               return 'pwErr';
             }
         }else{
-            done(null, false, { message: '가입되지 않은 회원입니다.' });
+          return 'noUser';
         }
-    }catch(error){
-        console.error(error);
-    }
+   
   }
 
   async kakaoValidateUser(accessToken: string, refreshToken: string, profile: any, done: any): Promise<any>{
@@ -60,6 +60,14 @@ export class AuthService {
       done(error);
     }
 }
+
+async login(user: any) {
+  const payload = { username: user.email, sub: user.id };
+  return {
+    access_token: this.jwtService.sign(payload),
+  };
+}
+
 
   async createUser(authDto:AuthDto):Promise<string>{
     try{

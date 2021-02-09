@@ -5,7 +5,7 @@ import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,
   import { Post } from './post.entity'
   import { FileManage } from './fileManage.entity'
   
-  @Entity('users')
+  @Entity('user')
   export class User {
     @PrimaryGeneratedColumn()
     id: number;
@@ -34,7 +34,7 @@ import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,
     @Column({nullable:true})
     deletedAt: Date;
   
-    @OneToMany(type => Post, post => post.user)
+    @OneToMany( () => Post, post => post.user)
     post: Post[];
 
     @OneToMany(type => FileManage, fileManage => fileManage.user)

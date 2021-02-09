@@ -29,6 +29,8 @@ async function bootstrap() {
   app.setBaseViewsDir(views);
   app.setViewEngine('html');
 
+  app.enableCors();
+
   await app.listen(process.env.PORT||8001);
 }
 bootstrap();

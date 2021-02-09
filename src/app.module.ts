@@ -9,13 +9,13 @@ import { PostModule } from './main/modelcontroller/posts/module/posts.module';
 import { PostService } from './main/modelcontroller/posts/service/posts.service';
 import { PostController } from './main/modelcontroller/posts/controller/posts.controller';
 
-import { AuthService } from './main/modelcontroller/auth/service/auth.service';
-import { AuthModule } from './main/modelcontroller/auth/module/auth.module';
+import { AuthService } from './main/modelcontroller/auth/auth.service';
+import { AuthModule } from './main/modelcontroller/auth/auth.module';
 import { IsLoggedIn,IsNotLoggedIn } from './middleware/auth.middleware';
 
 import { UsersService } from './main/modelcontroller/users/users.service';
 import { UsersModule } from './main/modelcontroller/users/users.module';
-import { AuthController } from './main/modelcontroller/auth/controller/auth.controller';
+import { AuthController } from './main/modelcontroller/auth/auth.controller';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 
